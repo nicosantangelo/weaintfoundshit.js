@@ -27,10 +27,10 @@
                 video = document.createElement('video');
 
                 sourceMP4.type = "video/mp4";
-                sourceMP4.src = "//i.imgur.com/2IuUua.mp4";
+                sourceMP4.src = "//i.imgur.com/2IuUuar.mp4";
 
                 sourceWebm.type = "video/webm";
-                sourceWebm.src = "//i.imgur.com/2IuUua.webm";
+                sourceWebm.src = "//i.imgur.com/2IuUuar.webm";
 
                 video.style.position = "relative";
                 video.style.top = "50px";
