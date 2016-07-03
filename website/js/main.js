@@ -1,4 +1,8 @@
 (function () {
+  //
+  // First step
+  //
+
   var selector = document.getElementById('js-selector-input')
   var results  = document.getElementById('js-results')
 
@@ -14,6 +18,7 @@
       
     } else {
       var $results = jQuery(selector.value) // where the magic happens
+
       if ($results.length) {
         var pluralizedText = $results.length === 1 ? 'element' : 'elements'
         results.innerHTML = "Found " + $results.length + " " + pluralizedText + " for '" + selector.value + "'. Good job sport!"
@@ -23,12 +28,34 @@
         delay(function () {
           results.innerHTML = "Wasn't that awesome?"
           delayedCleanResults()
+
+          jQuery('#js-hidden-step').fadeIn()
         }, 2750)
       }
     }
 
     return false
   })
+
+  //
+  // Second step
+  //
+
+  var defaultUrl = window.WEAINTFOUND_VIDEO_URL
+
+  jQuery('#js-url-input').on('keyup', function () {
+    window.WEAINTFOUND_VIDEO_URL = this.value
+  })
+
+  jQuery('#js-reset-url').on('click', function (event) {
+    document.getElementById('js-url-input').value = defaultUrl
+    window.WEAINTFOUND_VIDEO_URL = defaultUrl
+    event.preventDefault()
+  })
+
+  //
+  // Utils
+  //
 
   function delayedCleanResults () {
     delay(function () { results.innerHTML = '' })

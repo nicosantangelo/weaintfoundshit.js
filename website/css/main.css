@@ -124,16 +124,6 @@ p.medium {
 }
 
 
-.text-left {
-  text-align: left;
-}
-.text-center {
-  text-align: center;
-}
-.text-right {
-  text-align: right;
-}
-
 .container {
   padding-right: 15px;
   padding-left: 15px;
@@ -155,11 +145,13 @@ p.medium {
   }
 }
 
+
 .results {
   width: 576px; /* input + button */
   margin: 4px auto 0;
   text-align: left;
 }
+
 
 .footer {
    position:absolute;
@@ -167,7 +159,6 @@ p.medium {
    width:100%;
    height:50px;
 }
-
 
 .links {
   margin-top: 10px;
@@ -184,8 +175,28 @@ p.medium {
   margin-bottom: -3px;
 }
 
+
+/* Fallback */
+
 #_weaintfoundshit_ span {
   text-decoration: underline;
+}
+
+
+/* UTILS */
+
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 768px) {

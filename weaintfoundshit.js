@@ -3,7 +3,8 @@
     var rootjQuery = jQuery(document);
 
     var video;
-    var body = document.getElementsByTagName("body")[0];
+    var sourceMP4 = document.createElement("source");
+
     var container = document.createElement("div");
     container.id = "_weaintfoundshit_";
     jQuery(container).css({
@@ -15,22 +16,20 @@
         textAlign: "center"
     });
 
-    body.appendChild(container);
+    document.getElementsByTagName("body")[0].appendChild(container);
+
+    window.WEAINTFOUND_VIDEO_TYPE = "video/mp4"
+    window.WEAINTFOUND_VIDEO_URL = "//i.imgur.com/2IuUuar.mp4"; // I'm a professional
 
     jQuery.fn.init = function(selector, context) {
         var result = new oldinit(selector, context, rootjQuery);
 
         if((selector || context) && !result.length && !container.getElementsByTagName("video").length) {
+            sourceMP4.type = window.WEAINTFOUND_VIDEO_TYPE;
+            sourceMP4.src = window.WEAINTFOUND_VIDEO_URL;
+            
             if (!video) {
-                var sourceMP4 = document.createElement("source"); 
-                var sourceWebm = document.createElement("source"); 
                 video = document.createElement('video');
-
-                sourceMP4.type = "video/mp4";
-                sourceMP4.src = "//i.imgur.com/2IuUuar.mp4";
-
-                sourceWebm.type = "video/webm";
-                sourceWebm.src = "//i.imgur.com/2IuUuar.webm";
 
                 video.style.position = "relative";
                 video.style.top = "50px";
@@ -40,7 +39,7 @@
                     container.removeChild(video);
                 };
 
-                sourceWebm.onerror = sourceMP4.onerror = function() {
+                sourceMP4.onerror = function() {
                     if (container.getElementsByTagName("a").length) {
                         return;
                     }
@@ -59,7 +58,10 @@
                                 executeCallbacks();
                             }, data.delay);
                         } else {
-                            setTimeout(function() { container.removeChild(link); }, 1900);
+                            setTimeout(function() {
+                                container.removeChild(link);
+                                container.style.backgroundColor = 'transparent';
+                            }, 1900);
                         }
                     };
                     container.style.backgroundColor = "#FFF";
@@ -78,7 +80,9 @@
                 };
 
                 video.appendChild(sourceMP4);
-                video.appendChild(sourceWebm);
+            } else {
+                video.pause();
+                video.load();
             }
 
             container.appendChild(video);
