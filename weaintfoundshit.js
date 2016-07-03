@@ -2,6 +2,7 @@
     var oldinit = jQuery.fn.init;
     var rootjQuery = jQuery(document);
 
+    var video;
     var body = document.getElementsByTagName("body")[0];
     var container = document.createElement("div");
     container.id = "_weaintfoundshit_";
@@ -13,7 +14,6 @@
         zIndex: 1050,
         textAlign: "center"
     });
-    var video;
 
     body.appendChild(container);
 
@@ -34,6 +34,8 @@
 
                 video.style.position = "relative";
                 video.style.top = "50px";
+                video.style.width = "595px";
+                video.style.height = "321px";
                 video.onended = function(event) {
                     container.removeChild(video);
                 };
