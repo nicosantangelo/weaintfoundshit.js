@@ -46,12 +46,16 @@
                     }
                     var link = document.createElement("a");
                     var h1 = document.createElement("h1");
-                    var h1Data = [{ text: " ain't", delay: 200 }, { text: " found", delay: 300 }, { text: " SHIT", delay: 750 }];
+                    var h1Data = [{ text: " ain't", delay: 200 }, { text: " found ", delay: 300 }, { text: "SHIT", delay: 750 }];
                     var executeCallbacks = function() {
                         if (h1Data.length) {
                             var data = h1Data.shift();
                             setTimeout(function() {
-                                h1.innerHTML += data.text;
+                                if (h1Data.length) {
+                                    h1.innerHTML += data.text;
+                                } else {
+                                    h1.innerHTML += "<span>" + data.text + "</span>";
+                                }
                                 executeCallbacks();
                             }, data.delay);
                         } else {
@@ -64,6 +68,8 @@
 
                     h1.innerHTML = "We";
                     h1.style.textAlign = "center";
+                    h1.style.marginTop = "20px";
+                    h1.style.marginBottom = "20px";
 
                     link.appendChild(h1);
                     container.removeChild(video);

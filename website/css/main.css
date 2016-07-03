@@ -18,6 +18,7 @@ body {
 
 a {
   color: #0C1F31;
+  text-decoration: none;
 }
 
 b {
@@ -126,11 +127,9 @@ p.medium {
 .text-left {
   text-align: left;
 }
-
 .text-center {
   text-align: center;
 }
-
 .text-right {
   text-align: right;
 }
@@ -185,8 +184,8 @@ p.medium {
   margin-bottom: -3px;
 }
 
-.links a {
-  text-decoration: none;
+#_weaintfoundshit_ span {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
