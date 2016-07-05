@@ -33,6 +33,8 @@
 
                 video.style.position = "relative";
                 video.style.top = "50px";
+                video.style.width = "595px";
+                video.style.height = "321px";
 
                 video.onended = function(event) {
                     container.removeChild(video);
