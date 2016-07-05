@@ -25,15 +25,17 @@ b {
   font-weight: 600;
 }
 
+
 h1 {
   font-size: 40px;
   font-weight: 500;
   margin-bottom: 8px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 @media (min-width: 768px) {
   h1 {
+    margin-top: 100px;
     font-size: 120px;
     font-weight: 600;
   }
@@ -45,6 +47,7 @@ h2 {
   text-align: left;
   font-size: 28px;
 }
+
 
 blockquote {
   font-size: 14px;
@@ -62,8 +65,9 @@ blockquote {
   }
 }
 
+
 input {
-  width: 266px;
+  width: 206px;
   padding: .5em .6em;
   font-size: 13px;
   display: inline-block;
@@ -75,9 +79,13 @@ input {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+input:focus {
+  outline-color: #354458;
+  outline-width: 1px;
+}
 @media (min-width: 768px) {
   input {
-    width: 486px;
+    width: 400px;
     font-size: 16px;
     text-align: center;
     font-size: 16px;
@@ -88,15 +96,14 @@ input {
 button {
   height: 30px;
   line-height: 30px;
-  font-size: 14px;
-  padding: 0 1em;
+  font-size: 13px;
+  padding: 0 0.6em;
   border-radius: 2px;
   background: #354458;
   color: #FFF;
   border: none;
   display: inline-block;
   outline: 0;
-  text-transform: uppercase;
   vertical-align: middle;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -114,7 +121,6 @@ button:hover {
 }
 
 
-
 p {
   margin: auto;
 }
@@ -123,7 +129,6 @@ p.big {
   font-size: 15px;
   line-height: 20px;
 }
-
 @media (min-width: 768px) {
   p.big {
     font-size: 24px;
@@ -136,10 +141,26 @@ p.big {
   }
 }
 
+
+/* MAIN STYLES */
+
+.jquery {
+  font-size: 14px;
+  font-family: Consolas, Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+@media (min-width: 768px) {
+  .jquery {
+    font-size: 20px;
+  }
+}
+
 .results {
-  width: 576px; /* input + button */
+  width: 202px; /* input + button */
   margin: 4px auto 0;
   text-align: left;
+}
+@media (min-width: 768px) {
+  width: 576px; /* input + button */
 }
 
 .second .results {
@@ -178,8 +199,23 @@ p.big {
 }
 
 
+/* GITHUB CORNER */
 
-/* Fallback */
+.github-corner {
+  display: none;
+}
+@media (min-width: 768px) {
+  .github-corner {
+    display: block;
+  }
+}
+
+
+/* weaintfoundshit */
+
+#_weaintfoundshit_ > video {
+  width: 100%;
+}
 
 #_weaintfoundshit_ span {
   text-decoration: underline;

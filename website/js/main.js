@@ -30,7 +30,7 @@
           delayedCleanResults()
 
           jQuery('#js-hidden-step').fadeIn()
-        }, 2750)
+        }, 2800)
       }
     }
 

@@ -3,7 +3,7 @@
     var rootjQuery = jQuery(document);
 
     var video;
-    var sourceMP4 = document.createElement("source");
+    var source = document.createElement("source");
 
     var container = document.createElement("div");
     container.id = "_weaintfoundshit_";
@@ -25,21 +25,20 @@
         var result = new oldinit(selector, context, rootjQuery);
 
         if((selector || context) && !result.length && !container.getElementsByTagName("video").length) {
-            sourceMP4.type = window.WEAINTFOUND_VIDEO_TYPE;
-            sourceMP4.src = window.WEAINTFOUND_VIDEO_URL;
+            source.type = window.WEAINTFOUND_VIDEO_TYPE;
+            source.src = window.WEAINTFOUND_VIDEO_URL;
             
             if (!video) {
                 video = document.createElement('video');
 
                 video.style.position = "relative";
                 video.style.top = "50px";
-                video.style.width = "595px";
-                video.style.height = "321px";
+
                 video.onended = function(event) {
                     container.removeChild(video);
                 };
 
-                sourceMP4.onerror = function() {
+                source.onerror = function() {
                     if (container.getElementsByTagName("a").length) {
                         return;
                     }
@@ -79,7 +78,7 @@
                     executeCallbacks();
                 };
 
-                video.appendChild(sourceMP4);
+                video.appendChild(source);
             } else {
                 video.pause();
                 video.load();
