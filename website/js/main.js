@@ -48,8 +48,15 @@
   })
 
   jQuery('#js-reset-url').on('click', function (event) {
-    document.getElementById('js-url-input').value = defaultUrl
+    var urlInput = document.getElementById('js-url-input')
+    var placeholder = urlInput.placeholder
+
+    urlInput.value = ''
     window.WEAINTFOUND_VIDEO_URL = defaultUrl
+
+    urlInput.placeholder = "URL reseted, I'm so proud of you"
+    delay(function () { urlInput.placeholder = placeholder })
+
     event.preventDefault()
   })
 

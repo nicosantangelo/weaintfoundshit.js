@@ -50,6 +50,7 @@ h2 {
 
 
 blockquote {
+  width: 465px;
   font-size: 14px;
   margin: 15px auto;
   padding: 0.5em 10px;
@@ -59,7 +60,7 @@ blockquote {
 }
 @media (min-width: 768px) {
   blockquote {
-    width: 560px;
+    width: 565px;
     font-size: 16px;
     text-align: center;
   }
@@ -86,8 +87,6 @@ input:focus {
 @media (min-width: 768px) {
   input {
     width: 400px;
-    font-size: 16px;
-    text-align: center;
     font-size: 16px;
   }
 }
@@ -116,7 +115,7 @@ button:hover {
     height: 36px;
     line-height: 36px;
     font-size: 16px;
-    padding: 0 2em;
+    padding: 0 1.8em;
   }
 }
 
@@ -159,14 +158,34 @@ p.big {
   margin: 4px auto 0;
   text-align: left;
 }
-@media (min-width: 768px) {
-  width: 576px; /* input + button */
+
+.results a {
+  text-decoration: underline;
 }
 
 .second .results {
-  width: 476px;
+  width: 207px;
+  margin-bottom: 20px;
 }
 
+.url-input {
+  margin-right: 56px;
+}
+
+@media (min-width: 768px) {
+  .results,
+  .second .results {
+    width: 426px; /* input + button */
+  }
+
+  .second .results {
+    width: 170px;
+  }
+
+  .url-input {
+    margin-right: 99px;
+  }
+}
 
 .footer {
    width: 100%;
@@ -176,7 +195,8 @@ p.big {
 }
 
 .links {
-  margin-top: 30px;
+  width: 380px;
+  margin: 30px auto 0;
   font-size: 14px;
   font-weight: bold;
 }
@@ -194,7 +214,8 @@ p.big {
     font-size: 16px;
   }
   .links a, .links iframe {
-    margin: 0 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
@@ -256,6 +277,12 @@ p.big {
 @media (min-width: 768px) {
   .container {
     width: 900px;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-xs {
+    display: none;
   }
 }
 
