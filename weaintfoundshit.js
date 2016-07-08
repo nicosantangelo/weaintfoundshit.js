@@ -4,6 +4,7 @@
 
     var video;
     var source = document.createElement("source");
+    var hasVideoSupport = document.createElement('video').canPlayType;
 
     var container = document.createElement("div");
     container.id = "_weaintfoundshit_";
@@ -23,76 +24,82 @@
 
     jQuery.fn.init = function(selector, context) {
         var result = new oldinit(selector, context, rootjQuery);
+        var shouldRun = (selector || context) && !result.length
 
-        if((selector || context) && !result.length && !container.getElementsByTagName("video").length) {
+        if(shouldRun && !container.getElementsByTagName("video").length) {
             source.type = window.WEAINTFOUND_VIDEO_TYPE;
             source.src = window.WEAINTFOUND_VIDEO_URL;
             
-            if (!video) {
-                video = document.createElement('video');
+            if (hasVideoSupport) {
+                if (!video) {
+                    video = document.createElement('video');
 
-                video.style.position = "relative";
-                video.style.top = "50px";
-                video.style.width = "595px";
-                video.style.height = "321px";
+                    video.style.position = "relative";
+                    video.style.top = "50px";
+                    video.style.width = "595px";
+                    video.style.height = "321px";
 
-
-                video.onended = function(event) {
-                    container.removeChild(video);
-                    jQuery(document).trigger('finished.weaintfoundshit', this)
-                };
-
-                source.onerror = function() {
-                    if (container.getElementsByTagName("a").length) {
-                        return;
-                    }
-                    var link = document.createElement("a");
-                    var h1 = document.createElement("h1");
-                    var h1Data = [{ text: " ain't", delay: 200 }, { text: " found ", delay: 300 }, { text: "SHIT", delay: 750 }];
-                    var executeCallbacks = function() {
-                        if (h1Data.length) {
-                            var data = h1Data.shift();
-                            setTimeout(function() {
-                                if (h1Data.length) {
-                                    h1.innerHTML += data.text;
-                                } else {
-                                    h1.innerHTML += "<span>" + data.text + "</span>";
-                                }
-                                executeCallbacks();
-                            }, data.delay);
-                        } else {
-                            setTimeout(function() {
-                                container.removeChild(link);
-                                container.style.backgroundColor = 'transparent';
-                                jQuery(document).trigger('finished.weaintfoundshit', [this, "Source error"])
-                            }, 1900);
-                        }
+                    video.onended = function(event) {
+                        container.removeChild(video);
+                        jQuery(document).trigger('finished.weaintfoundshit', this)
                     };
-                    container.style.backgroundColor = "#FFF";
-                    link.href = "https://i.imgur.com/2IuUuar.gifv";
-                    link.target = "_blank";
 
-                    h1.innerHTML = "We";
-                    h1.style.textAlign = "center";
-                    h1.style.marginTop = "20px";
-                    h1.style.marginBottom = "20px";
+                    source.onerror = fallback
 
-                    link.appendChild(h1);
-                    container.removeChild(video);
-                    container.appendChild(link);
-                    executeCallbacks();
-                };
+                    video.appendChild(source);
+                } else {
+                    video.pause();
+                    video.load();
+                }
 
-                video.appendChild(source);
+                container.appendChild(video);
+                video.play();
             } else {
-                video.pause();
-                video.load();
+                fallback();
             }
-
-            container.appendChild(video);
-            video.play();
         }
 
         return result;
     };
+
+    function fallback () {
+        if (container.getElementsByTagName("a").length) {
+            return;
+        }
+        var link = document.createElement("a");
+        var h1 = document.createElement("h1");
+        var h1Data = [{ text: " ain't", delay: 200 }, { text: " found ", delay: 300 }, { text: "SHIT", delay: 750 }];
+        var executeCallbacks = function() {
+            if (h1Data.length) {
+                var data = h1Data.shift();
+                setTimeout(function() {
+                    if (h1Data.length) {
+                        h1.innerHTML += data.text;
+                    } else {
+                        h1.innerHTML += "<span>" + data.text + "</span>";
+                    }
+                    executeCallbacks();
+                }, data.delay);
+            } else {
+                setTimeout(function() {
+                    container.removeChild(link);
+                    container.style.backgroundColor = 'transparent';
+                    jQuery(document).trigger('finished.weaintfoundshit', [this, "Source error"])
+                }, 1900);
+            }
+        };
+        container.style.backgroundColor = "#FFF";
+        link.href = "https://i.imgur.com/2IuUuar.gifv";
+        link.target = "_blank";
+
+        h1.innerHTML = "We";
+        h1.style.textAlign = "center";
+        h1.style.marginTop = "20px";
+        h1.style.marginBottom = "20px";
+
+        link.appendChild(h1);
+        container.removeChild(video);
+        container.appendChild(link);
+        executeCallbacks();
+    }
 })();
