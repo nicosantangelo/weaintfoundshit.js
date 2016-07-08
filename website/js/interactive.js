@@ -37,11 +37,11 @@
             return
           }
 
-          if (uses === 3) {
+          if (uses === 2) {
             results.innerHTML = "You really liked the script huh?"
-          } else if (uses === 4) {
+          } else if (uses === 3) {
             results.innerHTML = "Are you're expecting something else to happen?"
-          } else if (uses === 5) {
+          } else if (uses === 4) {
             results.innerHTML = "Enough!"
             setTimeout(function () {
               WEAINTFOUND_VIDEO_URL = 'https://i.imgur.com/dVop7h0.mp4'

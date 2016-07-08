@@ -3,7 +3,7 @@
 
   var $navAnchor = jQuery('#js-nav-anchor')
   if (isMobile) {
-    $navAnchor.html("I'm on a phone")
+    $navAnchor.html("I'm on a phone").removeAttr('title')
   }
 
   $navAnchor.removeClass('invisible')
@@ -22,17 +22,25 @@ jQuery(document).one('finished.weaintfoundshit', function () {
   console.log("\nWhile you're at it, try adding a wrong URL\n ")
 
   var uses = 2
+  var fallbackUsed = false
+
+  var defaultUrl = window.WEAINTFOUND_VIDEO_URL
+
   jQuery(document).on('finished.weaintfoundshit', function (event, video, error) {
-    if(error) {
+    if(! fallbackUsed && error) {
       console.log("Holy tostitos that fallback was %cimpressive", "color:green;")
+      console.log("I reseted the default URL so you can try again")
+      window.WEAINTFOUND_VIDEO_URL = defaultUrl
+      fallbackUsed = true
+      return
     }
-    if (uses === 3) {
+    if (uses === 2) {
       console.log("You really liked the script huh?")
     }
-    if (uses === 4) {
+    if (uses === 3) {
       console.log("Are you're expecting something else to happen?")
     }
-    if (uses === 5) {
+    if (uses === 4) {
       console.log("Enough!")
       WEAINTFOUND_VIDEO_URL = 'https://i.imgur.com/dVop7h0.mp4'
       jQuery('Hero Quest')
