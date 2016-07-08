@@ -36,8 +36,10 @@
                 video.style.width = "595px";
                 video.style.height = "321px";
 
+
                 video.onended = function(event) {
                     container.removeChild(video);
+                    jQuery(document).trigger('finished.weaintfoundshit', this)
                 };
 
                 source.onerror = function() {
@@ -62,6 +64,7 @@
                             setTimeout(function() {
                                 container.removeChild(link);
                                 container.style.backgroundColor = 'transparent';
+                                jQuery(document).trigger('finished.weaintfoundshit', [this, "Source error"])
                             }, 1900);
                         }
                     };
