@@ -27,26 +27,53 @@
         <p class="big text-right">oh you didn't?...well you're in luck!</p>
       </header>
 
-
       <br /><br />
       <br class="hidden-xs" />
 
       <section class="first">
-        <p class="medium">Press <kbd>CMD</kbd> + <kbd>ALT</kbd> + <kbd>i</kbd> or <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>i</kbd> and try fetching a <i>missing</i> selector using <kbd>jQuery</kbd></p>
+        <p class="medium">With <b>weaintfoundshit.js™</b> you'll never have this problem for, uhm, the first time</p>
+
+        <br /><br />
+
+        <div class="text-center">
+          <form id="js-search-form" action="/">
+            <span class="jquery">jQuery(</span>&nbsp;<input type="text" id="js-selector-input" placeholder="A selector or whatever you like, I'm not your mom" autocomplete="off" />&nbsp;<span class="jquery">)</span>
+            &nbsp;
+            <button>eval</button>
+          </form>
+        </div>
+        <div class="results">
+          <small id="js-results"></small>
+        </div> 
+      </section>
+
+      <br /><br />
+
+      <section id="js-hidden-step" class="second hidden">
+        <p class="medium">I know what you are thinking, <i>"how much free time does this guy have?"</i> and <i>"what if I want another video?"</i>. Well, the answer to both is yes</p>
+
+        <br/>
+
+        <div class="text-center">
+          <span class="jquery">URL =</span>&nbsp;&nbsp;<input type="text" id="js-url-input" class="url-input" placeholder="URL for the video to be used (mp4)" autocomplete="off" />
+          <div class="results">
+            <small><span class="hidden-xs">While you're at it, t</span><span class="visible-xs">T</span>ry adding a bad URL or <span id="js-reset-url" class="clickeable">reset it</span></small>
+          </div> 
+        </div>
       </section>
 
     </div>
 
-    <div class="footer text-center">
+    <div class="footer">
       <div class="links">
-        <a id="js-nav-anchor" class="invisible" href="interactive.html">I don't get it?</a> &bull; <a href="http://nicosantangelo.github.io/portfolio/">Nicolás Santángelo</a> &bull; <a href="https://twitter.com/share" class="twitter-share-button" data-text="Look at this masterpiece"  data-via="NicoSantangelo">Tweet</a>
+        <a href="/">Using the console</a> &bull; <a href="http://nicosantangelo.github.io/portfolio/">Nicolás Santángelo</a> &bull; <a href="https://twitter.com/share" class="twitter-share-button" data-text="Look at this masterpiece" data-via="NicoSantangelo">Tweet</a>
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 
     <script src='../weaintfoundshit.js'></script>
-    <script src='js/main.js'></script>
+    <script src='js/interactive.js'></script>
 
 
     <!-- Github ribbon -->

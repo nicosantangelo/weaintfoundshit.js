@@ -50,7 +50,6 @@ h2 {
 
 
 blockquote {
-  width: 465px;
   font-size: 14px;
   margin: 15px auto;
   padding: 0.5em 10px;
@@ -120,6 +119,23 @@ button:hover {
 }
 
 
+kbd {
+    display: inline-block;
+    margin: 0 .1em;
+    padding: .1em .6em;
+    font-family: Consolas, Arial,"Helvetica Neue",Helvetica,sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #242729;
+    text-shadow: 0 1px 0 #FFF;
+    background-color: #e1e3e5;
+    border: 1px solid #adb3b9;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(12,13,14,0.2),0 0 0 2px #FFF inset;
+    white-space: nowrap;
+}
+
+
 p {
   margin: auto;
 }
@@ -155,6 +171,7 @@ p.big {
 
 .results {
   width: 202px; /* input + button */
+  height: 20px;
   margin: 4px auto 0;
   text-align: left;
 }
@@ -178,9 +195,6 @@ p.big {
     width: 426px; /* input + button */
   }
 
-  .second .results {
-    width: 170px;
-  }
 
   .url-input {
     margin-right: 99px;
@@ -195,22 +209,35 @@ p.big {
 }
 
 .links {
-  width: 380px;
+  width: 345px;
   margin: 30px auto 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .links a, .links iframe {
-  margin: 0 5px;
+  margin: 0 4px;
 }
 
 .links iframe {
   margin-bottom: -3px;
 }
 
+@media (min-width: 500px) {
+  .links {
+    width: 371px;
+    font-size: 14px;
+  }
+
+  .links a, .links iframe {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
 @media (min-width: 768px) {
   .links {
+    width: 461px;
     font-size: 16px;
   }
   .links a, .links iframe {
@@ -257,6 +284,16 @@ p.big {
 
 .hidden {
   display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.clickeable {
+  color: #0C1F31;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .container {

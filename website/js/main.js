@@ -1,77 +1,42 @@
 (function () {
-  //
-  // First step
-  //
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
-  var selector = document.getElementById('js-selector-input')
-  var results  = document.getElementById('js-results')
-
-  var defaultPlaceholder = selector.placeholder
-
-  jQuery('#js-search-form').on('submit', function () {
-    selector.placeholder = defaultPlaceholder
-    results.innerHTML = ''
-
-    if (!selector.value) {
-      selector.placeholder = "Come on now, you can do better than that"
-      delayedCleanPlaceholder()
-      
-    } else {
-      var $results = jQuery(selector.value) // where the magic happens
-
-      if ($results.length) {
-        var pluralizedText = $results.length === 1 ? 'element' : 'elements'
-        results.innerHTML = "Found " + $results.length + " " + pluralizedText + " for '" + selector.value + "'. Good job sport!"
-        delayedCleanResults()
-
-      } else {
-        delay(function () {
-          results.innerHTML = "Wasn't that awesome?"
-          delayedCleanResults()
-
-          jQuery('#js-hidden-step').fadeIn()
-        }, 2800)
-      }
-    }
-
-    return false
-  })
-
-  //
-  // Second step
-  //
-
-  var defaultUrl = window.WEAINTFOUND_VIDEO_URL
-
-  jQuery('#js-url-input').on('keyup', function () {
-    window.WEAINTFOUND_VIDEO_URL = this.value
-  })
-
-  jQuery('#js-reset-url').on('click', function (event) {
-    var urlInput = document.getElementById('js-url-input')
-    var placeholder = urlInput.placeholder
-
-    urlInput.value = ''
-    window.WEAINTFOUND_VIDEO_URL = defaultUrl
-
-    urlInput.placeholder = "URL reseted, I'm so proud of you"
-    delay(function () { urlInput.placeholder = placeholder })
-
-    event.preventDefault()
-  })
-
-  //
-  // Utils
-  //
-
-  function delayedCleanResults () {
-    delay(function () { results.innerHTML = '' })
-  }
-  function delayedCleanPlaceholder () {
-    delay(function () { selector.placeholder = defaultPlaceholder })
-  }
-  function delay (fn, time) {
-    setTimeout(fn, time || 2500)
+  var $navAnchor = jQuery('#js-nav-anchor')
+  if (isMobile) {
+    $navAnchor.html("I'm on a phone")
   }
 
+  $navAnchor.removeClass('invisible')
 })()
+
+jQuery(document).one('finished.weaintfoundshit', function () {
+  var space = Array(34).join(' ')
+  var styles = "padding:4px 0px;font-size:12px;font-family:Consolas;color:#242729;background-color:#e1e3e5;"
+
+  console.log("Wasn't that %cawesome?", "color:green;")
+  console.log("You can change the source/type of the video using\n ")
+  console.log("%c" + space, styles)
+  console.log("%c  window.WEAINTFOUND_VIDEO_URL   ", styles)
+  console.log("%c  window.WEAINTFOUND_VIDEO_TYPE  ", styles)
+  console.log("%c" + space, styles)
+  console.log("\nWhile you're at it, try adding a wrong URL\n ")
+
+  var uses = 2
+  jQuery(document).on('finished.weaintfoundshit', function (event, video, error) {
+    if(error) {
+      console.log("Holy tostitos that fallback was %cimpressive", "color:green;")
+    }
+    if (uses === 3) {
+      console.log("You really liked the script huh?")
+    }
+    if (uses === 4) {
+      console.log("Are you're expecting something else to happen?")
+    }
+    if (uses === 5) {
+      console.log("Enough!")
+      WEAINTFOUND_VIDEO_URL = 'https://i.imgur.com/dVop7h0.mp4'
+      jQuery('Hero Quest')
+    }
+    uses += 1
+  })
+})
