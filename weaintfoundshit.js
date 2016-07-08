@@ -1,105 +1,107 @@
 (function() {
-    var oldinit = jQuery.fn.init;
-    var rootjQuery = jQuery(document);
+  var oldinit = jQuery.fn.init;
+  var rootjQuery = jQuery(document);
 
-    var video;
-    var source = document.createElement("source");
-    var hasVideoSupport = document.createElement('video').canPlayType;
+  var video;
+  var source = document.createElement("source");
+  var hasVideoSupport = document.createElement('video').canPlayType;
 
-    var container = document.createElement("div");
-    container.id = "_weaintfoundshit_";
-    jQuery(container).css({
-        position: "fixed",
-        top: 0,
-        right: 0,
-        width: "100%",
-        zIndex: 1050,
-        textAlign: "center"
-    });
+  var container = document.createElement("div");
+  container.id = "_weaintfoundshit_";
+  jQuery(container).css({
+    position: "fixed",
+    top: 0,
+    right: 0,
+    width: "100%",
+    zIndex: 1050,
+    textAlign: "center"
+  });
 
-    document.getElementsByTagName("body")[0].appendChild(container);
+  document.getElementsByTagName("body")[0].appendChild(container);
 
-    window.WEAINTFOUND_VIDEO_TYPE = "video/mp4"
-    window.WEAINTFOUND_VIDEO_URL = "//i.imgur.com/2IuUuar.mp4"; // I'm a professional
+  window.WEAINTFOUND_VIDEO_TYPE = "video/mp4";
+  window.WEAINTFOUND_VIDEO_URL = "//i.imgur.com/2IuUuar.mp4"; // I'm a professional
 
-    jQuery.fn.init = function(selector, context) {
-        var result = new oldinit(selector, context, rootjQuery);
-        var shouldRun = (selector || context) && !result.length
+  jQuery.fn.init = function(selector, context) {
+    var result = new oldinit(selector, context, rootjQuery);
+    var shouldRun = (selector || context) && !result.length;
 
-        if(shouldRun && !container.getElementsByTagName("video").length) {
-            source.type = window.WEAINTFOUND_VIDEO_TYPE;
-            source.src = window.WEAINTFOUND_VIDEO_URL;
-            
-            if (hasVideoSupport) {
-                if (!video) {
-                    video = document.createElement('video');
+    if(shouldRun && !container.getElementsByTagName("video").length) {
+      source.type = window.WEAINTFOUND_VIDEO_TYPE;
+      source.src = window.WEAINTFOUND_VIDEO_URL;
+      
+      if (hasVideoSupport) {
+        if (!video) {
+          video = document.createElement('video');
 
-                    video.style.position = "relative";
-                    video.style.top = "50px";
-                    video.style.width = "595px";
-                    video.style.height = "321px";
+          video.style.position = "relative";
+          video.style.top = "50px";
+          video.style.width = "595px";
+          video.style.height = "321px";
 
-                    video.onended = function(event) {
-                        container.removeChild(video);
-                        jQuery(document).trigger('finished.weaintfoundshit', this)
-                    };
+          video.onended = function(event) {
+            container.removeChild(video);
+            jQuery(document).trigger('finished.weaintfoundshit', this)
+          };
 
-                    source.onerror = fallback
+          source.onerror = fallback;
 
-                    video.appendChild(source);
-                } else {
-                    video.pause();
-                    video.load();
-                }
-
-                container.appendChild(video);
-                video.play();
-            } else {
-                fallback();
-            }
+          video.appendChild(source);
+        } else {
+          video.pause();
+          video.load();
         }
 
-        return result;
+        container.appendChild(video);
+        video.play();
+      } else {
+        fallback();
+      }
+    }
+
+    return result;
+  };
+
+  function fallback () {
+    if (container.getElementsByTagName("a").length) {
+      return;
+    }
+    var link = document.createElement("a");
+    var h1   = document.createElement("h1");
+    var h1Data = [{ text: " ain't", delay: 200 }, { text: " found ", delay: 300 }, { text: "SHIT", delay: 750 }];
+
+    var executeCallbacks = function() {
+      if (h1Data.length) {
+        var data = h1Data.shift();
+        setTimeout(function() {
+          if (h1Data.length) {
+            h1.innerHTML += data.text;
+          } else {
+            h1.innerHTML += "<span>" + data.text + "</span>";
+          }
+          executeCallbacks();
+        }, data.delay);
+      } else {
+        setTimeout(function() {
+          container.removeChild(link);
+          container.style.backgroundColor = 'transparent';
+          jQuery(document).trigger('finished.weaintfoundshit', [this, "Source error"])
+        }, 1900);
+      }
     };
 
-    function fallback () {
-        if (container.getElementsByTagName("a").length) {
-            return;
-        }
-        var link = document.createElement("a");
-        var h1 = document.createElement("h1");
-        var h1Data = [{ text: " ain't", delay: 200 }, { text: " found ", delay: 300 }, { text: "SHIT", delay: 750 }];
-        var executeCallbacks = function() {
-            if (h1Data.length) {
-                var data = h1Data.shift();
-                setTimeout(function() {
-                    if (h1Data.length) {
-                        h1.innerHTML += data.text;
-                    } else {
-                        h1.innerHTML += "<span>" + data.text + "</span>";
-                    }
-                    executeCallbacks();
-                }, data.delay);
-            } else {
-                setTimeout(function() {
-                    container.removeChild(link);
-                    container.style.backgroundColor = 'transparent';
-                    jQuery(document).trigger('finished.weaintfoundshit', [this, "Source error"])
-                }, 1900);
-            }
-        };
-        container.style.backgroundColor = "#FFF";
-        link.href = "https://i.imgur.com/2IuUuar.gifv";
-        link.target = "_blank";
+    container.style.backgroundColor = "#FFF";
+    link.href = "https://i.imgur.com/2IuUuar.gifv";
+    link.target = "_blank";
 
-        h1.innerHTML = "We";
-        h1.style.textAlign = "center";
-        h1.style.marginTop = "20px";
-        h1.style.marginBottom = "20px";
+    h1.innerHTML = "We";
+    h1.style.textAlign = "center";
+    h1.style.marginTop = "20px";
+    h1.style.marginBottom = "20px";
 
-        link.appendChild(h1);
-        container.removeChild(video);
-        container.appendChild(link);
-        executeCallbacks();
-    }
+    link.appendChild(h1);
+    container.removeChild(video);
+    container.appendChild(link);
+    executeCallbacks();
+  }
 })();
