@@ -1,47 +1,69 @@
 (function() {
-  var oldinit = jQuery.fn.init;
-  var rootjQuery = jQuery(document);
-
   var video;
   var source = document.createElement("source");
   var hasVideoSupport = document.createElement('video').canPlayType;
 
   var container = document.createElement("div");
   container.id = "_weaintfoundshit_";
-  jQuery(container).css({
-    position: "fixed",
-    top: 0,
-    right: 0,
-    width: "100%",
-    zIndex: 1050,
-    textAlign: "center"
-  });
+
+  container.style.position  = "fixed";
+  container.style.top       = 0;
+  container.style.right     = 0;
+  container.style.width     = "100%";
+  container.style.zIndex    = 1050;
+  container.style.textAlign = "center";
 
   document.getElementsByTagName("body")[0].appendChild(container);
 
   window.WEAINTFOUND_VIDEO_TYPE = "video/mp4";
-  window.WEAINTFOUND_VIDEO_URL = "//i.imgur.com/2IuUuar.mp4"; // I'm a professional
+  window.WEAINTFOUND_VIDEO_URL  = "//i.imgur.com/2IuUuar.mp4"; // I'm a professional
 
-  jQuery.fn.init = function(selector, context) {
-    var result = new oldinit(selector, context, rootjQuery);
-    var shouldRun = (selector || context) && !result.length;
+  if (document.querySelector && document.querySelectorAll) {
+    var oldQuerySelector    = document.querySelector;
+    var oldQuerySelectorAll = document.querySelectorAll;
 
+    document.querySelector = function (selector) {
+      var result = oldQuerySelector.call(document, selector);
+      mockedSelector(!result);
+      return result;
+    };
+
+    document.querySelectorAll = function (selector) {
+      var result = oldQuerySelectorAll.call(document, selector);
+      mockedSelector(result.length === 0);
+      return result;
+    };
+  }
+
+  if (jQuery) {
+    var oldinit    = jQuery.fn.init;
+    var rootjQuery = jQuery(document);
+
+    jQuery.fn.init = function(selector, context) {
+      var result = new oldinit(selector, context, rootjQuery);
+      var shouldRun = (selector || context) && !result.length;
+      mockedSelector(shouldRun);
+      return result;
+    }
+  }
+
+  function mockedSelector(shouldRun) {
     if(shouldRun && !container.getElementsByTagName("video").length) {
       source.type = window.WEAINTFOUND_VIDEO_TYPE;
-      source.src = window.WEAINTFOUND_VIDEO_URL;
+      source.src  = window.WEAINTFOUND_VIDEO_URL;
       
       if (hasVideoSupport) {
         if (!video) {
           video = document.createElement('video');
 
           video.style.position = "relative";
-          video.style.top = "50px";
-          video.style.width = "595px";
-          video.style.height = "321px";
+          video.style.top      = "50px";
+          video.style.width    = "595px";
+          video.style.height   = "321px";
 
           video.onended = function(event) {
             container.removeChild(video);
-            jQuery(document).trigger('finished.weaintfoundshit', this)
+            triggerFinish(this);
           };
 
           source.onerror = fallback;
@@ -58,8 +80,6 @@
         fallback();
       }
     }
-
-    return result;
   };
 
   function fallback () {
@@ -85,13 +105,13 @@
         setTimeout(function() {
           container.removeChild(link);
           container.style.backgroundColor = 'transparent';
-          jQuery(document).trigger('finished.weaintfoundshit', [this, "Source error"])
+          triggerFinish([this, "Source error"]);
         }, 1900);
       }
     };
 
     container.style.backgroundColor = "#FFF";
-    link.href = "https://i.imgur.com/2IuUuar.gifv";
+    link.href = window.WEAINTFOUND_VIDEO_URL;
     link.target = "_blank";
 
     h1.innerHTML = "We";
@@ -103,5 +123,9 @@
     container.removeChild(video);
     container.appendChild(link);
     executeCallbacks();
+  }
+
+  function triggerFinish() {
+    if (jQuery) rootjQuery.trigger('finished.weaintfoundshit', arguments);
   }
 })();
