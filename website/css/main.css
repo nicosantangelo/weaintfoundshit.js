@@ -121,7 +121,7 @@ button:hover {
 
 kbd {
   margin: 0 .1em;
-  padding: 0.2em .6em 0.1em;
+  padding: 0.2em .6em 0.1em; 
   font-size: 12px;
   line-height: 18px;
   border-radius: 3px;
@@ -135,9 +135,16 @@ kbd {
   font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 
+kbd.small {
+  padding: 0em 0.3em 0em; 
+}
 
 p {
   margin: auto;
+}
+
+p.medium {
+  line-height: 24px;
 }
 
 p.big {
@@ -152,7 +159,7 @@ p.big {
 
   p.medium {
     font-size: 20px;
-    line-height: 29px;
+    line-height: 32px;
   }
 }
 
