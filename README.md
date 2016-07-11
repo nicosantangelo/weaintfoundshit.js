@@ -1,6 +1,6 @@
-# weaintfoundshit
+# weaintfoundshit.js
 
-An script to be able to tell whether or not your search for a DOM element was sucessful
+A script to quickly tell whether or not your search for a DOM element was sucessful
 
 ## Use
 
