@@ -29,11 +29,16 @@ If the URL produces an error, you don't have `<video>` support, or you're not co
 
 ## What if I want to use it in every site I visit ?
 
-I got you covered, [drag this to your bookmarks bar](javascript:var s = document.createElement('script');s.src = 'https://github.com/NicoSantangelo/weaintfoundshit.js';document.getElementsByTagName('body')[0].appendChild(s);)
 
-## Website/demo
+I got you covered, add this as an URL to a new bookmark:
 
-[Here](https://nicosantangelo.github.io/weaintfoundshit.js) ([mobile/not dev version](https://nicosantangelo.github.io/weaintfoundshit.js))
+```
+javascript:var s = document.createElement('script');s.src = 'https://cdn.rawgit.com/NicoSantangelo/weaintfoundshit.js/master/weaintfoundshit.min.js';document.getElementsByTagName('body')[0].appendChild(s);s.onload = function () { console.log('Script loaded, everybody rejoice!')};
+```
+
+## Demo
+
+[Over here](https://nicosantangelo.github.io/weaintfoundshit.js) ( [mobile/not dev version](https://nicosantangelo.github.io/weaintfoundshit.js/interactive.html) )
 
 
 **That's all folks**
