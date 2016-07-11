@@ -7,7 +7,7 @@
   if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false) {
     // Browser detecting like is 1999
     // https://bugs.chromium.org/p/chromium/issues/detail?id=626415
-    console.log('Hey!, look ↑, some versions of Chrome tend to change the frame for no reason, make sure it says top')
+    console.log('%cHey!, look ↑, some versions of Chrome tend to change the frame for no reason, make sure it says top', 'font-weight:bold;')
   }
 })();
 
