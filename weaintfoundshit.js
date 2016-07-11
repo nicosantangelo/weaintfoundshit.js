@@ -1,7 +1,9 @@
 (function() {
+  // Initialization
   var video;
   var source = document.createElement("source");
-  var hasVideoSupport = document.createElement('video').canPlayType;
+  var hasVideoSupport = document.createElement("video").canPlayType;
+  var hasjQuery = typeof jQuery !== "undefined"
 
   var container = document.createElement("div");
   container.id = "_weaintfoundshit_";
@@ -15,46 +17,65 @@
 
   document.getElementsByTagName("body")[0].appendChild(container);
 
+  // Configuration (I'm a professional)
   window.WEAINTFOUND_VIDEO_TYPE = "video/mp4";
-  window.WEAINTFOUND_VIDEO_URL  = "//i.imgur.com/2IuUuar.mp4"; // I'm a professional
+  window.WEAINTFOUND_VIDEO_URL  = "//i.imgur.com/2IuUuar.mp4";
 
-  if (document.querySelector && document.querySelectorAll) {
-    var oldQuerySelector    = document.querySelector;
-    var oldQuerySelectorAll = document.querySelectorAll;
-
-    document.querySelector = function (selector) {
-      var result = oldQuerySelector.call(document, selector);
-      mockedSelector(!result);
-      return result;
-    };
-
-    document.querySelectorAll = function (selector) {
-      var result = oldQuerySelectorAll.call(document, selector);
-      mockedSelector(result.length === 0);
-      return result;
-    };
+  // Mock ALL the things
+  var methods = ["getElementById", "getElementsByTagName", "getElementsByClassName", "querySelector", "querySelectorAll"];
+  for (var i = 0; i < methods.length; i++) {
+    mockNativeMethod(methods[i])
   }
 
-  if (jQuery) {
+  if (hasjQuery) {
+    mockjQuery()
+  }
+
+  function mockNativeMethod(method) {
+    var oldMethod = document[method];
+
+    if (oldMethod) {
+      document[method] = function (selector) {
+        var result = oldMethod.call(document, selector);
+        var shouldRun = result instanceof NodeList ? result.length === 0 : !result; // gasp
+        delayedShowVideo(shouldRun);
+        return result;
+      };
+    }
+  };
+
+  function mockjQuery() {
     var oldinit    = jQuery.fn.init;
     var rootjQuery = jQuery(document);
 
     jQuery.fn.init = function(selector, context) {
       var result = new oldinit(selector, context, rootjQuery);
       var shouldRun = (selector || context) && !result.length;
-      mockedSelector(shouldRun);
+      delayedShowVideo(shouldRun);
       return result;
     }
-  }
+  };
 
-  function mockedSelector(shouldRun) {
+  var delayedShowVideo = (function delayedShowVideo () {
+    // Why is this here I hear you ask. Well, aside from the fact that setTimeout solves everything
+    // it's so we avoid "locking" the execution of some piece of JS that relies on timing (or AJAX) when loading the video
+    var timerId
+    return function (shouldRun) {
+      if (shouldRun) {
+        clearTimeout(timerId)
+        timerId = setTimeout(function() { showVideo(shouldRun); }, 100)
+      }
+    }
+  })()
+
+  function showVideo (shouldRun) {
     if(shouldRun && !container.getElementsByTagName("video").length) {
       source.type = window.WEAINTFOUND_VIDEO_TYPE;
       source.src  = window.WEAINTFOUND_VIDEO_URL;
       
       if (hasVideoSupport) {
         if (!video) {
-          video = document.createElement('video');
+          video = document.createElement("video");
 
           video.style.position = "relative";
           video.style.top      = "50px";
@@ -104,7 +125,7 @@
       } else {
         setTimeout(function() {
           container.removeChild(link);
-          container.style.backgroundColor = 'transparent';
+          container.style.backgroundColor = "transparent";
           triggerFinish([this, "Source error"]);
         }, 1900);
       }
@@ -123,9 +144,9 @@
     container.removeChild(video);
     container.appendChild(link);
     executeCallbacks();
-  }
+  };
 
-  function triggerFinish() {
-    if (jQuery) rootjQuery.trigger('finished.weaintfoundshit', arguments);
-  }
+  function triggerFinish () {
+    if (hasjQuery) jQuery(document).trigger("finished.weaintfoundshit", arguments);
+  };
 })();
