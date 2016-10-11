@@ -121,7 +121,7 @@ button:hover {
 
 kbd {
   margin: 0 .1em;
-  padding: 0.2em .6em 0.1em; 
+  padding: 0.2em .6em 0.1em;
   font-size: 12px;
   line-height: 18px;
   border-radius: 3px;
@@ -136,7 +136,7 @@ kbd {
 }
 
 kbd.small {
-  padding: 0em 0.3em 0em; 
+  padding: 0em 0.3em 0em;
 }
 
 p {
@@ -335,3 +335,7 @@ p.big {
     display: none;
   }
 }
+
+/* GITHUB CORNER */
+
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
